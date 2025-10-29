@@ -1,0 +1,50 @@
+type User @table {
+  username: String!
+  createdAt: Timestamp!
+  email: String
+  lastLoginAt: Timestamp
+}
+
+type Lecture @table {
+  user: User!
+  title: String!
+  audioFileUrl: String!
+  uploadDate: Timestamp!
+  processingStatus: String!
+  duration: Int
+}
+
+type Transcript @table {
+  lecture: Lecture!
+  content: String!
+  generatedAt: Timestamp!
+}
+
+type Summary @table {
+  lecture: Lecture!
+  content: String!
+  generatedAt: Timestamp!
+}
+
+type FlashcardSet @table {
+  lecture: Lecture!
+  generatedAt: Timestamp!
+}
+
+type Flashcard @table {
+  flashcardSet: FlashcardSet!
+  question: String!
+  answer: String!
+}
+
+type Quiz @table {
+  lecture: Lecture!
+  generatedAt: Timestamp!
+}
+
+type QuizQuestion @table {
+  quiz: Quiz!
+  questionText: String!
+  correctAnswer: String!
+  options: [String]
+}
